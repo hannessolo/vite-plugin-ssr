@@ -6,10 +6,6 @@ export { headings }
 
 const headingsWithoutLink: HeadingWithoutLink[] = [
   {
-    title: '`export { customExports }`',
-    url: '/customExports',
-  },
-  {
     title: 'Custom Exports & Custom Hooks',
     url: '/exports',
   },
@@ -33,7 +29,6 @@ const headingsWithoutLink: HeadingWithoutLink[] = [
     title: 'SPA vs SSR vs HTML',
     url: '/SPA-vs-SSR-vs-HTML',
   },
-  { title: 'Custom Exports', url: '/custom-exports' },
   { title: 'HTML `<head>`', url: '/html-head' },
   { title: 'What is Hydration?', url: '/hydration' },
   { title: <code>dist/server/importBuild.js</code>, url: '/importBuild.js' },
