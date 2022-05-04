@@ -6,6 +6,10 @@ export { headings }
 
 const headingsWithoutLink: HeadingWithoutLink[] = [
   {
+    title: 'Migration Guide',
+    url: '/migration-guide',
+  },
+  {
     title: 'Custom Exports & Custom Hooks',
     url: '/exports',
   },
