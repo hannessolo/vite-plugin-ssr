@@ -5,30 +5,16 @@ import { assertUsage, toPosixPath, assert, getRoot } from '../../utils'
 import path from 'path'
 import symlinkDir from 'symlink-dir'
 import resolve from 'resolve'
+import type { ConfigVitePluginSsr } from '../config/types'
+import { getPageFilesInclude } from '../config/getPageFilesInclude'
 
-async function getGlobRoots(config: { root: string; vitePluginSsr: { pageFiles?: { include?: string[] } } }) {
+async function getGlobRoots(config: { root: string } & ConfigVitePluginSsr) {
   const root = getRoot(config)
-  const includePageFiles = resolveConfig(config.vitePluginSsr.pageFiles)
+  const pageFilesInclude = getPageFilesInclude(config)
   const entriesDefault = ['/']
-  const entriesInclude = await Promise.all(includePageFiles.map((pkgName) => createIncludePath(pkgName, root)))
+  const entriesInclude = await Promise.all(pageFilesInclude.map((pkgName) => createIncludePath(pkgName, root)))
   const globRoots = [...entriesDefault, ...entriesInclude]
   return globRoots
-}
-
-function resolveConfig(pageFiles?: { include?: string[] }) {
-  const includePageFiles: string[] = []
-  if (pageFiles?.include) {
-    includePageFiles.push(...pageFiles.include.map(normalizeIncludePaths))
-  }
-  return includePageFiles
-}
-
-function normalizeIncludePaths(includePath: string): string {
-  includePath = toPosixPath(includePath)
-  if (includePath.endsWith('/')) {
-    includePath = includePath.slice(0, -1)
-  }
-  return includePath
 }
 
 async function createIncludePath(pkgName: string, root: string): Promise<string> {

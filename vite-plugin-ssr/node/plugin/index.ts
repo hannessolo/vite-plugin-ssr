@@ -1,7 +1,7 @@
 export default plugin
 export { plugin }
 export { plugin as ssr }
-export type ConfigVps = { vitePluginSsr: VpsConfig }
+export type { ConfigVitePluginSsr } from './plugins/config/types'
 
 import type { Plugin } from 'vite'
 import GlobPlugin from 'vite-plugin-glob'
@@ -39,7 +39,7 @@ function plugin(vpsConfig?: VpsConfig): any {
     extractExportNamesPlugin(),
     suppressRollupWarning(),
     retrieveDevServer(),
-    distEntriesPlugin(),
+    ...distEntriesPlugin(),
     GlobPlugin() as any,
   ]
   return plugins as any

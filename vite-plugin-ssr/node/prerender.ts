@@ -50,7 +50,7 @@ type GlobalPrerenderingContext = GlobalContext & {
 
 type PageContext = GlobalPrerenderingContext & {
   url: string
-  _prerenderSourceFile: string | null
+  _prerenderSourceFile: string
   _pageContextAlreadyProvidedByPrerenderHook?: true
 }
 
